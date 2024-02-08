@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Delete Task</h1>
+
+  <h2 style="color: red">
+    {% if task.is_done %}
+      Are you sure you want to delete task "{{ task.content }}"?<br>
+    {% else %}
+      Are you sure you want to delete task "{{ task.content }}"?<br>
+      (This task is not done!)
+    {% endif %}
+  </h2>
+
+  <hr>
+  <strong>Content: </strong>{{ task.content }}<br>
+  <hr>
+  <strong>Datetime: </strong>{{ task.datetime }}<br>
+  <hr>
+
+  <strong>Deadline: </strong>
+
+  {% if task.deadline %}
+    {{ task.deadline }}
+  {% else %}
+    <em>null</em>
+  {% endif %}
+
+  <hr>
+  <br>
+
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+  <input type="submit" value="Delete" class="btn btn-danger">
+  </form>
+
+  <br>
+
+  <button onclick="goBack()" class="btn btn-secondary">Go Back</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+{% endblock %}
