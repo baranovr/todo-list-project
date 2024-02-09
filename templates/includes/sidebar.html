@@ -1,0 +1,17 @@
+<ul class="sidebar-nav list-group" style="margin: 20px">
+
+    <li class="list-group-item">
+      <a class="btn" style="color: dodgerblue" href="{% url "todo_list:task-list" %}">
+        <strong>Home</strong>
+      </a>
+    </li>
+
+    <li class="list-group-item">
+      <a class="btn" style="color: dodgerblue" href="{% url "todo_list:tag-list"%}?next={{request.path}}">
+        <strong>
+          Tags
+        </strong>
+      </a>
+    </li>
+
+</ul>

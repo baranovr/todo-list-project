@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1 style="margin-top: 10px">TODO list</h1>
+
+  <h1>
+    <a class="btn btn-primary" style="float: right; margin-right: 10px" href="{% url "todo_list:task-add" %}">
+      Add task
+    </a>
+  </h1>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  {% if task_list %}
+    {% for task in task_list %}
+
+      <strong>
+        {{ task.content }}
+
+        {% if task.is_done %}
+
+          <div style="border: 1px solid green; padding: 5px; display: inline-block;">
+              <a style="color: green;">
+                  Done
+              </a>
+          </div>
+          <div class="bnt btn-secondary" style="float: right; margin-right: 20px; border-radius: 5px; padding: 10px">
+            <a href="{% url "todo_list:task-undo" pk=task.id %}" style="color: white">
+              Undo
+            </a>
+          </div>
+
+      {% else %}
+
+          <div style="border: 1px solid red; padding: 5px; display: inline-block;">
+              <a style="color: red;">
+                  Not done
+              </a>
+          </div>
+            <div style="float: right;
+              border: 5px solid green;
+              border-radius: 5px;
+              padding: 5px;
+              display: inline-block;
+              background-color: green;
+              margin-right: 10px">
+              <a href="{% url "todo_list:task-make-completed" pk=task.id %}" style="color: white">
+                  Complete
+              </a>
+            </div>
+          </strong>
+      {% endif %}
+
+      <br>
+      <br>
+
+      <p><strong>Created:</strong> {{ task.datetime }}</p>
+
+        {% if task.deadline %}
+          <p style="color: darkred">
+            <strong>Deadline: </strong>
+            {{ task.deadline }}
+          </p>
+          {% else %}
+          <p><strong>Deadline: </strong><em>null</em></p>
+        {% endif %}
+
+        <h4 style="color: dimgray">
+          Tags: {% for tag in task.tags.all %}
+          {{ tag.name }}
+          {% endfor %}
+        </h4><br>
+          <a href="{% url "todo_list:task-update" pk=task.id %}">
+            <strong>Update</strong>
+          </a>
+          <a href="{% url "todo_list:task-delete" pk=task.id %}" style="color: red">
+            <strong>Delete</strong>
+          </a>
+      <hr style="height: 3px; border: none; background-color: black; margin: 20px 0;">
+
+    {% endfor %}
+  {% endif %}
+{% endblock %}

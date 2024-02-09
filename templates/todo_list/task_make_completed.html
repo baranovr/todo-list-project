@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+  <h2 style="margin-top: 20px">
+    Make the task completed?
+  </h2>
+
+  <hr>
+
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Yes">
+  </form>
+
+  <hr>
+
+  <br>
+
+  <button onclick="goBack()" class="btn btn-secondary">Go Back</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+{% endblock %}
